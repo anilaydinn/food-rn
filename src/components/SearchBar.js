@@ -1,13 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import { Feather } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 
-export default function SearchBar() {
+export default function SearchBar({ term, onTermChange, onTermSubmit }) {
   return (
     <View style={styles.backgroundStyle}>
       <Feather name="search" style={styles.iconStyle} />
-      <TextInput placeholder="Search" style={styles.inputStyle} />
+      <TextInput
+        autoCapitalize="none"
+        autoCorrect={false}
+        placeholder="Search"
+        style={styles.inputStyle}
+        value={term}
+        onChangeText={(newTerm) => onTermChange(newTerm)}
+        onEndEditing={() => onTermSubmit()}
+      />
     </View>
   );
 }
